@@ -21,8 +21,8 @@ The AI Career Portal brings career guidance and job-search tools into one place.
 Clone the repository and install the project dependencies using the package manager configured for the application.
 
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone [https://github.com/SahilUK77/AI-Career_Portal.git](https://github.com/SahilUK77/AI-Career_Portal.git)
+cd AI-Career_Portal
 ```
 
 Then follow the setup instructions for the selected frontend, backend, and database technologies.
@@ -56,4 +56,4 @@ npm run dev
 
 ## License
 
-Add the project license here.
+[LICENSE](LICENSE)
