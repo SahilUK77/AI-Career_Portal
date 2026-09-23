@@ -1,10 +1,11 @@
 from django.contrib import admin
-from django.urls import path
-from career_app import views
+from django.urls import path, include
+from career_app.views import dashboard_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.dashboard_view, name='dashboard'),
-    # Add this to your existing URL patterns
-    path('api/upload-resume/', views.upload_resume_view, name='upload_resume'),
+    path('', dashboard_view, name='dashboard'),
+    
+    # This automatically imports all API endpoints from career_app/urls.py
+    path('api/', include('career_app.urls')),
 ]
