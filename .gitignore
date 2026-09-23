@@ -1,0 +1,68 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+.env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Build and coverage output
+dist/
+build/
+.next/
+out/
+coverage/
+.nyc_output/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Framework and tool caches
+.cache/
+.parcel-cache/
+.turbo/
+.vite/
+.eslintcache
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+*.seed
+
+# Databases and local uploads
+*.sqlite
+*.sqlite3
+uploads/
+media/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test artifacts
+.tox/
+.nox/
+test-results/
+
+# Local configuration
+*.local.json
+*.local.yaml
+*.local.yml
