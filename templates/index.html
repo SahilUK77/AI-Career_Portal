@@ -3,206 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Career Readiness Platform | Dashboard</title>
-    
-    <!-- Tailwind CSS Play CDN for instant styling without installation -->
+    <title>CareerAI MP - Career Intelligence Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Professional Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        .active-tab { background-color: #e0e7ff; color: #3730a3; font-weight: 600; border-right: 4px solid #4f46e5; }
     </style>
 </head>
-<body class="bg-gray-50 flex h-screen overflow-hidden">
+<body class="bg-gray-50 text-gray-800 flex h-screen overflow-hidden">
 
-    <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
-        <div class="h-16 flex items-center px-6 border-b border-gray-200">
-            <!-- MPOnline Branding Placeholder -->
-            <span class="text-xl font-bold text-blue-600">CareerAI <span class="text-gray-800">MP</span></span>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between">
+        <div>
+            <div class="p-6 border-b border-gray-100 flex items-center space-x-2">
+                <i class="fa-solid fa-graduation-cap text-indigo-600 text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-900 tracking-tight">CareerAI <span class="text-indigo-600">MP</span></h1>
+            </div>
+            <nav class="mt-4 flex flex-col space-y-1">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn flex items-center px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 text-left active-tab w-full">
+                    <i class="fa-solid fa-chart-pie mr-3 w-5"></i> My Dashboard
+                </button>
+                <button onclick="switchTab('resume')" id="tab-resume" class="tab-btn flex items-center px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 text-left w-full">
+                    <i class="fa-solid fa-file-lines mr-3 w-5"></i> AI Resume Builder
+                </button>
+                <button onclick="switchTab('interview')" id="tab-interview" class="tab-btn flex items-center px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 text-left w-full">
+                    <i class="fa-solid fa-microphone mr-3 w-5"></i> Mock Interview
+                </button>
+                <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn flex items-center px-6 py-3 text-sm text-gray-600 hover:bg-gray-50 text-left w-full">
+                    <i class="fa-solid fa-building-columns mr-3 w-5"></i> Govt Schemes & Hub
+                </button>
+            </nav>
         </div>
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="#" class="flex items-center px-4 py-2.5 bg-blue-50 text-blue-700 rounded-lg font-medium">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                My Dashboard
-            </a>
-            <a href="#" class="flex items-center px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg font-medium">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                AI Resume Builder
-            </a>
-            <a href="#" class="flex items-center px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg font-medium">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                Mock Interview
-            </a>
-            <a href="#" class="flex items-center px-4 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg font-medium">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                Govt Schemes
-            </a>
-        </nav>
+        <div class="p-4 border-t border-gray-100 text-xs text-gray-400">
+            Madhya Pradesh Career Portal &copy; 2026
+        </div>
     </aside>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- Top Header -->
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
-            <h1 class="text-xl font-semibold text-gray-800">Welcome, Student</h1>
-            <input type="file" id="resumeUpload" accept=".pdf" class="hidden">
-                <button onclick="document.getElementById('resumeUpload').click()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                Upload Resume (PDF)
+    <!-- Main Container -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        
+        <!-- Header -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8">
+            <h2 id="page-title" class="text-lg font-semibold text-gray-800">Welcome, Student</h2>
+            <div class="flex items-center space-x-4">
+                <input type="file" id="resumeInput" class="hidden" accept=".pdf" onchange="uploadResume()">
+                <button id="uploadBtn" onclick="document.getElementById('resumeInput').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Resume (PDF)</span>
                 </button>
+            </div>
         </header>
 
-        <!-- Scrollable Dashboard Content -->
-        <div class="flex-1 overflow-y-auto p-6">
-            
-            <!-- Target Role & Readiness Score -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:col-span-2">
-                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Target Career Path</h2>
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">Junior Data Analyst</h3>
-                            <p class="text-gray-600 mt-1">Based on your B.Sc Mathematics background.</p>
-                        </div>
+        <!-- Main Scrollable Body -->
+        <main class="flex-1 overflow-y-auto p-8">
+
+            <!-- 1. Dashboard View -->
+            <section id="section-dashboard" class="content-view space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 md:col-span-2">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Target Career Path</span>
+                        <h3 id="targetRole" class="text-2xl font-bold text-gray-900 mt-1">Junior Data Analyst</h3>
+                        <p id="targetSub" class="text-sm text-gray-500 mt-1">Upload your resume to extract validated skills and match industry benchmarks.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center text-center">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">AI Readiness Score</span>
+                        <div id="readinessScore" class="text-5xl font-extrabold text-indigo-600 mt-2">65%</div>
+                        <span class="text-xs text-emerald-600 font-medium mt-1 flex items-center">
+                            <i class="fa-solid fa-arrow-trend-up mr-1"></i> Based on industry competency gaps
+                        </span>
                     </div>
                 </div>
-                
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col items-center justify-center">
-                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">AI Readiness Score</h2>
-                    <div class="text-4xl font-extrabold text-blue-600">65%</div>
-                    <p class="text-sm text-green-600 font-medium mt-2">↑ 10% since last week</p>
+
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
+                        <h4 class="text-base font-bold text-gray-900">Your AI Skill Gap Analysis</h4>
+                    </div>
+                    <table class="w-full text-left text-sm text-gray-600">
+                        <thead class="bg-gray-50 text-gray-400 text-xs uppercase font-semibold">
+                            <tr>
+                                <th class="py-3 px-6">Skill Requirement</th>
+                                <th class="py-3 px-6">Level</th>
+                                <th class="py-3 px-6">Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="skillsTableBody" class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="py-4 px-6 font-medium text-gray-800">Advanced Excel & Pivot Tables</td>
+                                <td class="py-4 px-6"><span class="px-2.5 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 font-semibold">Proficient</span></td>
+                                <td class="py-4 px-6 text-gray-500">Ready for interview technical screening.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-medium text-gray-800">SQL Data Querying</td>
+                                <td class="py-4 px-6"><span class="px-2.5 py-1 text-xs rounded-full bg-amber-100 text-amber-700 font-semibold">Beginner</span></td>
+                                <td class="py-4 px-6 text-gray-500">Complete: <strong>SWAYAM Database Fundamentals</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            </section>
 
-            <!-- AI Skill Gap Analysis Section -->
-            <h2 class="text-lg font-bold text-gray-900 mb-4 mt-8">Your AI Skill Gap Analysis</h2>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Required Skill</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Your Level</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AI Recommendation</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <!-- Skill 1 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Advanced Excel & Pivot Tables</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Proficient</span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-500">Ready for interview questions.</td>
-                        </tr>
-                        <!-- Skill 2 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">SQL Data Querying</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Beginner</span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-500">
-                                Complete <a href="#" class="text-blue-600 hover:underline">SWAYAM SQL Basics Course</a> (Est. 12 hours)
-                            </td>
-                        </tr>
-                        <!-- Skill 3 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Data Visualization (Tableau/PowerBI)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Missing</span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-gray-500">
-                                Start with a beginner project. Try building a dashboard using public MP state data.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <!-- 2. AI Resume Builder Section -->
+            <section id="section-resume" class="content-view hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Resume Presentation Optimizations</h3>
+                    <p class="text-sm text-gray-500 mb-4">Actionable enhancements detected by comparing your resume against high-ranking entry-level profiles.</p>
+                    <ul id="resumeTipsContainer" class="space-y-3">
+                        <li class="p-4 bg-gray-50 rounded-lg text-sm text-gray-700 border-l-4 border-indigo-500">
+                            Upload a resume to generate specific formatting and quantitative metric improvements.
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
-        </div>
-    </main>
+            <!-- 3. Mock Interview Section -->
+            <section id="section-interview" class="content-view hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Tailored Mock Interview Questions</h3>
+                    <p class="text-sm text-gray-500 mb-4">Simulate your upcoming technical rounds with questions focused on your exact toolset.</p>
+                    <div id="interviewQuestionsContainer" class="space-y-4">
+                        <p class="text-sm text-gray-400">Upload your resume to formulate custom technical questions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Govt Schemes & Ingested Hub -->
+            <section id="section-schemes" class="content-view hidden space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900">Government Skilling & Career Programs</h3>
+                        <p class="text-sm text-gray-500">Direct integration with official state and national employment programs.</p>
+                    </div>
+                    <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1.5 rounded-full font-semibold border border-blue-200">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Verified Public Schemes
+                    </span>
+                </div>
+                <div id="schemesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 animate-pulse">
+                        <div class="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                        <div class="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                        <div class="h-3 bg-gray-200 rounded w-2/3"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Controller -->
     <script>
-    document.getElementById('resumeUpload').addEventListener('change', async function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+        let currentProfileId = null;
 
-    const formData = new FormData();
-    formData.append('resume', file);
-
-    const btn = event.target.nextElementSibling;
-    const originalText = btn.innerText;
-    btn.innerText = "Analyzing Resume with Gemini...";
-
-    try {
-        const response = await fetch('/api/upload-resume/', {
-            method: 'POST',
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || "Server error");
+        function switchTab(tabKey) {
+            document.querySelectorAll('.content-view').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active-tab'));
+            
+            document.getElementById(`section-${tabKey}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabKey}`).classList.add('active-tab');
         }
 
-        // 1. Update the Target Career Path (Targets the first <h3> or large header)
-        const targetRoleElement = document.querySelector('h3'); 
-        if (targetRoleElement && data.target_professions.length > 0) {
-            targetRoleElement.innerText = data.target_professions[0];
-        }
+        async function uploadResume() {
+            const input = document.getElementById('resumeInput');
+            if (!input.files || input.files.length === 0) return;
 
-        // 2. Rebuild the Skills and Gaps Table
-        const tbody = document.querySelector('tbody');
-        if (tbody) {
-            tbody.innerHTML = ''; // Clear the hardcoded mock data
+            const btn = document.getElementById('uploadBtn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Analyzing with Gemini...</span>`;
+            btn.disabled = true;
 
-            // Inject Extracted Skills (Proficient)
-            data.extracted_skills.forEach(skill => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="padding: 1rem; font-weight: 500;">${skill}</td>
-                        <td style="padding: 1rem;"><span style="background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 99px; font-size: 0.875rem;">Proficient</span></td>
-                        <td style="padding: 1rem; color: #4b5563;">Ready to highlight in interviews.</td>
-                    </tr>
-                `;
-            });
+            const formData = new FormData();
+            formData.append('resume', input.files[0]);
 
-            // Inject Skill Gaps & Recommended Courses (Missing)
-            data.skill_gaps.forEach((gap, index) => {
-                // Safely grab the corresponding course, or provide a fallback
-                const course = data.recommended_courses[index] || "Search SWAYAM for this skill";
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="padding: 1rem; font-weight: 500;">${gap}</td>
-                        <td style="padding: 1rem;"><span style="background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 99px; font-size: 0.875rem;">Missing</span></td>
-                        <td style="padding: 1rem; color: #4b5563;">Complete: <strong>${course}</strong></td>
-                    </tr>
-                `;
-            });
-        }
+            try {
+                const response = await fetch('/api/upload-resume/', {
+                    method: 'POST',
+                    body: formData
+                });
 
-        // 3. Update the Readiness Score dynamically
-        // Deducts 10% for every missing skill gap, with a minimum floor of 35%
-        const scoreElements = document.querySelectorAll('h1, .text-5xl'); 
-        scoreElements.forEach(el => {
-            if (el.innerText.includes('%')) {
-                const penalty = data.skill_gaps.length * 10;
-                el.innerText = Math.max(35, 100 - penalty) + '%';
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || "Failed to process resume.");
+
+                currentProfileId = data.profile_id;
+                document.getElementById('page-title').innerText = `Welcome, ${data.full_name}`;
+                document.getElementById('targetRole').innerText = data.target_role;
+                document.getElementById('readinessScore').innerText = `${data.readiness_score}%`;
+
+                // Render Skills Table
+                const tbody = document.getElementById('skillsTableBody');
+                tbody.innerHTML = '';
+
+                data.extracted_skills.forEach(skill => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td class="py-4 px-6 font-medium text-gray-800">${skill}</td>
+                            <td class="py-4 px-6"><span class="px-2.5 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 font-semibold">Proficient</span></td>
+                            <td class="py-4 px-6 text-gray-500">Ready for interview screening.</td>
+                        </tr>
+                    `;
+                });
+
+                data.skill_gaps.forEach((gap, idx) => {
+                    const course = data.recommended_courses[idx] || "Search SWAYAM Portal";
+                    tbody.innerHTML += `
+                        <tr>
+                            <td class="py-4 px-6 font-medium text-gray-800">${gap}</td>
+                            <td class="py-4 px-6"><span class="px-2.5 py-1 text-xs rounded-full bg-rose-100 text-rose-700 font-semibold">Missing</span></td>
+                            <td class="py-4 px-6 text-gray-500">Complete: <strong>${course}</strong></td>
+                        </tr>
+                    `;
+                });
+
+                // Populate AI Resume Builder
+                const tipsList = document.getElementById('resumeTipsContainer');
+                tipsList.innerHTML = '';
+                data.resume_improvements.forEach(tip => {
+                    tipsList.innerHTML += `
+                        <li class="p-4 bg-indigo-50 border-l-4 border-indigo-500 text-sm text-indigo-900 rounded-r-lg font-medium">
+                            <i class="fa-solid fa-wand-magic-sparkles mr-2 text-indigo-600"></i> ${tip}
+                        </li>
+                    `;
+                });
+
+                // Populate Mock Interview Questions
+                const interviewContainer = document.getElementById('interviewQuestionsContainer');
+                interviewContainer.innerHTML = '';
+                data.interview_questions.forEach((q, idx) => {
+                    interviewContainer.innerHTML += `
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <span class="text-xs font-bold text-indigo-600 tracking-wider uppercase">Question 0${idx + 1}</span>
+                            <p class="text-sm font-semibold text-gray-800 mt-1">${q}</p>
+                        </div>
+                    `;
+                });
+
+                // Fetch Matched Schemes & Catalog
+                fetchRecommendations(currentProfileId);
+
+            } catch (err) {
+                console.error("Upload error:", err);
+                alert("Upload Exception: " + err.message);
+            } finally {
+                btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i><span>Upload Resume (PDF)</span>`;
+                btn.disabled = false;
             }
-        });
-
-    } catch (err) {
-        console.error("Pipeline Error:", err);
-        alert("Engine Error: " + err.message);
-    } finally {
-        // 4. Reset the upload button so the user can upload another resume
-        const btn = document.getElementById('uploadBtn') || document.querySelector('button');
-        if (btn) {
-            btn.innerText = 'Upload Resume (PDF)';
-            btn.disabled = false;
         }
-    }
-});
-</script>
+
+        async function fetchRecommendations(profileId) {
+            try {
+                const res = await fetch(`/api/recommendations/${profileId}/`);
+                const payload = await res.json();
+
+                const container = document.getElementById('schemesContainer');
+                container.innerHTML = '';
+
+                const allItems = [...payload.schemes, ...payload.opportunities];
+
+                if (allItems.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 col-span-2">Background scoring in progress. Refreshing listings...</p>`;
+                    setTimeout(() => fetchRecommendations(profileId), 3000);
+                    return;
+                }
+
+                allItems.forEach(item => {
+                    const opp = item.opportunity;
+                    container.innerHTML += `
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between hover:border-indigo-300 transition-all">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="px-2.5 py-1 text-xs font-semibold rounded-full ${opp.is_free ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                                        ${opp.stipend_or_cost}
+                                    </span>
+                                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">
+                                        ${item.relevance_score}% Match
+                                    </span>
+                                </div>
+                                <h4 class="text-base font-bold text-gray-900">${opp.title}</h4>
+                                <p class="text-xs text-gray-400 mb-2">${opp.provider} &bull; ${opp.mode} (${opp.location})</p>
+                                <p class="text-sm text-gray-600 mb-3">${opp.description}</p>
+                                <p class="text-xs text-gray-500 font-medium mb-4"><strong>Eligibility:</strong> ${opp.eligibility}</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-400">${item.reasoning}</span>
+                                <a href="${opp.url}" target="_blank" class="bg-gray-900 hover:bg-black text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors">
+                                    Apply Directly &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } catch (e) {
+                console.error("Failed to load recommendations:", e);
+            }
+        }
+    </script>
 </body>
 </html>

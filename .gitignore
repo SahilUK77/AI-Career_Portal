@@ -66,3 +66,8 @@ test-results/
 *.local.json
 *.local.yaml
 *.local.yml
+
+.env
+.venv/
+__pycache__/
+*.pyc
