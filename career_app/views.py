@@ -1,5 +1,6 @@
 import traceback
 from django.shortcuts import render
+from langchain_google_genai.chat_models import GoogleRateLimitError
 from rest_framework import generics, filters, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -64,6 +65,12 @@ class UploadResumeAPIView(APIView):
                 "resume_improvements": profile.resume_improvements,
                 "interview_questions": profile.interview_questions
             }, status=status.HTTP_200_OK)
+
+        except GoogleRateLimitError:
+            return Response(
+                {"error": "The AI service is currently handling high traffic. Please wait 10 seconds and try uploading again."},
+                status=status.HTTP_429_TOO_MANY_REQUESTS
+            )
 
         except Exception as e:
             traceback.print_exc()

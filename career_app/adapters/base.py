@@ -1,6 +1,13 @@
 import hashlib
+from langchain_google_genai import ChatGoogleGenerativeAI
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-3.8-flash",
+    max_retries=6, 
+    timeout=60
+)
 
 class BaseAdapter(ABC):
     """Base interface and deduplication contract for opportunity ingestion."""

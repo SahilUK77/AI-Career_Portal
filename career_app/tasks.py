@@ -5,6 +5,7 @@ from .models import StudentProfile, Opportunity, OpportunitySkill, ProfileMatch
 from .adapters.govt_schemes import GovtSchemesAdapter
 from .adapters.course_portal import CoursePortalAdapter
 from .ml_pipeline import calculate_opportunity_relevance
+from .adapters.commercial_jobs import CommercialJobsAdapter
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,13 @@ def run_govt_schemes_scraper(self):
         logger.error(f"Error executing government schemes scraper: {exc}")
         raise self.retry(exc=exc, countdown=60)
 
+@shared_task
+def run_courses_scraper():
+    adapters = [
+        CoursePortalAdapter(),
+        CommercialJobsAdapter()  # <-- Add your real-time API here
+    ]
+
 @shared_task(bind=True, max_retries=3)
 def run_courses_scraper(self):
     try:
@@ -49,7 +57,7 @@ def run_courses_scraper(self):
         logger.error(f"Error executing courses scraper: {exc}")
         raise self.retry(exc=exc, countdown=60)
 
-@shared_task
+@shared_task(rate_limit='10/m')
 def calculate_matches_for_profile(profile_id: int):
     """Calculates scores between an uploaded resume profile and active catalog listings."""
     try:
