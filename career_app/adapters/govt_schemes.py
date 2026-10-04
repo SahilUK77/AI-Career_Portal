@@ -1,14 +1,16 @@
 import logging
-from typing import List, Dict, Any
+from typing import Any
+
 from .base import BaseAdapter
 
 logger = logging.getLogger(__name__)
+
 
 class GovtSchemesAdapter(BaseAdapter):
     def __init__(self):
         super().__init__(provider_name="Govt of India / MP Skill Portals")
 
-    def fetch(self) -> List[Dict[str, Any]]:
+    def fetch(self) -> list[dict[str, Any]]:
         # Seeded ingestion targets: In production, query public JSON endpoints (e.g., Skill India, NPTEL, MP Rojgar)
         return [
             {
@@ -22,7 +24,12 @@ class GovtSchemesAdapter(BaseAdapter):
                 "url": "https://mmsky.mp.gov.in/",
                 "description": "On-the-job training program for youth in Madhya Pradesh across technical, industrial, and software domains with monthly allowance.",
                 "eligibility": "12th / ITI / Diploma / Any Graduate (Age 18-29)",
-                "skills": ["Data Cleaning", "Advanced Excel", "Office Automation", "Python"]
+                "skills": [
+                    "Data Cleaning",
+                    "Advanced Excel",
+                    "Office Automation",
+                    "Python",
+                ],
             },
             {
                 "title": "Skill India Digital Free IT & Cloud Certification",
@@ -35,7 +42,13 @@ class GovtSchemesAdapter(BaseAdapter):
                 "url": "https://www.skillindiadigital.gov.in/",
                 "description": "Government supported national certification in cloud fundamentals, data analytics, and digital technology tools.",
                 "eligibility": "Open to all enrolled college students and graduates",
-                "skills": ["Cloud Platforms", "AWS", "Azure", "Data Visualization", "SQL"]
+                "skills": [
+                    "Cloud Platforms",
+                    "AWS",
+                    "Azure",
+                    "Data Visualization",
+                    "SQL",
+                ],
             },
             {
                 "title": "SWAYAM NPTEL: Python for Data Science & AI",
@@ -48,11 +61,17 @@ class GovtSchemesAdapter(BaseAdapter):
                 "url": "https://swayam.gov.in/nc_details/NPTEL",
                 "description": "Comprehensive university-grade course addressing practical data science, numpy, pandas, and predictive statistics.",
                 "eligibility": "Basic knowledge of high school mathematics or programming",
-                "skills": ["Python", "Data Cleaning", "Predictive Modeling", "Pandas", "NumPy"]
-            }
+                "skills": [
+                    "Python",
+                    "Data Cleaning",
+                    "Predictive Modeling",
+                    "Pandas",
+                    "NumPy",
+                ],
+            },
         ]
 
-    def normalize(self, raw_item: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize(self, raw_item: dict[str, Any]) -> dict[str, Any]:
         return {
             "dedupe_hash": self.compute_dedupe_hash(raw_item["url"], raw_item["title"]),
             "title": raw_item["title"],
@@ -66,5 +85,5 @@ class GovtSchemesAdapter(BaseAdapter):
             "description": raw_item.get("description", ""),
             "eligibility": raw_item.get("eligibility", ""),
             "skills": raw_item.get("skills", []),
-            "metadata_json": {"source": "official_portal_feed"}
+            "metadata_json": {"source": "official_portal_feed"},
         }

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,25 +14,67 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='CareerPath',
+            name="CareerPath",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.TextField(blank=True)),
-                ('required_skills', models.TextField(blank=True, help_text='Comma-separated list of required skills')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.TextField(blank=True)),
+                (
+                    "required_skills",
+                    models.TextField(
+                        blank=True, help_text="Comma-separated list of required skills"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='StudentProfile',
+            name="StudentProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('full_name', models.CharField(blank=True, default='Student', max_length=255)),
-                ('target_role', models.CharField(blank=True, max_length=255)),
-                ('current_skills', models.TextField(blank=True, help_text='Comma-separated extracted skills')),
-                ('skill_gaps', models.TextField(blank=True, help_text='Comma-separated skill gaps')),
-                ('readiness_score', models.IntegerField(default=50)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "full_name",
+                    models.CharField(blank=True, default="Student", max_length=255),
+                ),
+                ("target_role", models.CharField(blank=True, max_length=255)),
+                (
+                    "current_skills",
+                    models.TextField(
+                        blank=True, help_text="Comma-separated extracted skills"
+                    ),
+                ),
+                (
+                    "skill_gaps",
+                    models.TextField(
+                        blank=True, help_text="Comma-separated skill gaps"
+                    ),
+                ),
+                ("readiness_score", models.IntegerField(default=50)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

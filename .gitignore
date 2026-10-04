@@ -16,6 +16,7 @@ __pycache__/
 *.local
 
 # Build and coverage output
+staticfiles/
 dist/
 build/
 .next/
@@ -43,6 +44,8 @@ logs/
 # Databases and local uploads
 *.sqlite
 *.sqlite3
+celery*
+dump.rdb
 uploads/
 media/
 
@@ -71,4 +74,8 @@ test-results/
 .venv/
 __pycache__/
 *.pyc
-.gitignore "`ncelerybeat-schedule*"
+
+# Project and test files
+career-readiness-platform/
+docs/
+dummy.pdf
